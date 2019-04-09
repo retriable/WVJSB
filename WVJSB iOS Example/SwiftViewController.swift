@@ -39,8 +39,8 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
     
 
     @IBAction func reload(_ sender: Any) {
-//        let string = "http://localhost:8000/index.html";
-        let string = "http://192.168.2.2:8000/index.html";
+        let string = "http://localhost:8000/index.html";
+//        let string = "http://192.168.2.2:8000/index.html";
         webView.loadRequest(URLRequest(url: URL(string:string)!))
     }
     

@@ -58,8 +58,8 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)reload:(id)sender {
-    //    NSString *URLString =@"http://localhost:8000/index.html";
-    NSString *URLString =@"http://192.168.2.2:8000/index.html";
+        NSString *URLString =@"http://localhost:8000/index.html";
+//    NSString *URLString =@"http://192.168.2.2:8000/index.html";
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:URLString]]];
 }
 - (IBAction)immediate:(id)sender {
