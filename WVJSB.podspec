@@ -3,9 +3,9 @@ Pod::Spec.new do |spec|
     spec.version  = '1.0.0'
     spec.license  = 'MIT'
     spec.summary  = 'WebView JavaScript Bridge'
-    spec.homepage = 'https://github.com/retriable/WVJSB'
+    spec.homepage = 'https://github.com/retriable/WebViewJavaScriptBridge'
     spec.author   = { 'retriable' => 'retriable@retriable.com' }
-    spec.source   = { :git => 'https://github.com/retriable/WVJSB.git',:tag => "#{spec.version}" }
+    spec.source   = { :git => 'https://github.com/retriable/WebViewJavaScriptBridge.git',:tag => "#{spec.version}" }
     spec.description = 'Cross-iframe WebView JavaScript Bridge.'
     spec.requires_arc = true
     spec.source_files = 'WVJSB/*.{h,m}'
