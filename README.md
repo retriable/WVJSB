@@ -24,7 +24,7 @@ Add the following to your project's Cartfile:
 github "retriable/WebViewJavaScriptBridge"
 ```
 ### Web
-Add [JavaScript](https://raw.githubusercontent.com/retriable/WebViewJavaScriptBridge/master/WVJSB/Resources/www/Script/Client.js) to web project.
+Add [JavaScript](https://raw.githubusercontent.com/retriable/WebViewJavaScriptBridge/master/WVJSB/Resources/www/scripts/Client.js) to web project.
 
 ## Native usage
 #### Create server
