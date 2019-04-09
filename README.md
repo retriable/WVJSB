@@ -117,3 +117,13 @@ const operation = client.event('request',null).onAck(function(operation,paramete
 ```JavaScript
 operation.cancel();
 ```
+
+### Run Example
+
+Open Terminal,and execute following
+```shell
+cd pathToProject/WVJSB/Resources/www
+python -m SimpleHTTPServer
+```
+
+Then open project and run
