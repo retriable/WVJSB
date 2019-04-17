@@ -1,4 +1,4 @@
-# WVJSB
+# WebViewJavaScriptBridge
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/retriable/WebViewJavaScriptBridge/master/LICENSE)
 [![Build Status](https://img.shields.io/travis/retriable/WebViewJavaScriptBridge/master.svg?style=flat)](https://travis-ci.org/retriable/WebViewJavaScriptBridge)
