@@ -1,8 +1,8 @@
-# WebViewJavaScriptBridge
+# WVJSB
 
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/retriable/WebViewJavaScriptBridge/master/LICENSE)
-[![Build Status](https://img.shields.io/travis/retriable/WebViewJavaScriptBridge/master.svg?style=flat)](https://travis-ci.org/retriable/WebViewJavaScriptBridge)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/retriable/WebViewJavaScriptBridge)
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/retriable/WVJSB/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/retriable/WVJSB/master.svg?style=flat)](https://travis-ci.org/retriable/WVJSB)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/retriable/WVJSB)
 [![Pod Version](https://img.shields.io/cocoapods/v/WVJSB.svg?style=flat)](http://cocoapods.org/pods/WVJSB)
 [![Pod Platform](https://img.shields.io/cocoapods/p/WVJSB.svg?style=flat)](http://cocoapods.org/pods/WVJSB)
 
@@ -21,10 +21,10 @@ pod 'WVJSB'
 
 Add the following to your project's Cartfile:
 ```ruby
-github "retriable/WebViewJavaScriptBridge"
+github "retriable/WVJSB"
 ```
 ### Web
-Add [JavaScript](https://raw.githubusercontent.com/retriable/WebViewJavaScriptBridge/master/WVJSB/Resources/www/scripts/Client.js) to web project.
+Add [JavaScript](https://raw.githubusercontent.com/retriable/WVJSB/master/WVJSB/Resources/www/scripts/Client.js) to web project.
 
 ## Native usage
 #### Create server
