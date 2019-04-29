@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name     = 'WVJSB'
-    spec.version  = '1.0.0'
+    spec.version  = '1.0.1'
     spec.license  = 'MIT'
     spec.summary  = 'WebView JavaScript Bridge'
     spec.homepage = 'https://github.com/retriable/WVJSB'
