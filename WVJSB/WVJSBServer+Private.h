@@ -24,6 +24,8 @@ static NSString *WVJSBCorrectedJSString(NSString *v){
     v = [v stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
     v = [v stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
     v = [v stringByReplacingOccurrencesOfString:@"\f" withString:@"\\f"];
+    v = [v stringByReplacingOccurrencesOfString:@"\b" withString:@"\\b"];
+    v = [v stringByReplacingOccurrencesOfString:@"\t" withString:@"\\t"];
     v = [v stringByReplacingOccurrencesOfString:@"\u2028" withString:@"\\u2028"];
     v = [v stringByReplacingOccurrencesOfString:@"\u2029" withString:@"\\u2029"];
     return v;

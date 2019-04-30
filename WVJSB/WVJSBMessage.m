@@ -27,14 +27,14 @@
     NSString *to=message[@"to"];
     NSString *type=message[@"type"];
     id error=message[@"error"];
-    id body = message[@"body"];
+    id parameter = message[@"parameter"];
     self=[self init];
     if (!self) return nil;
     self.from=from;
     self.to=to;
     self.mid=mid;
     self.type=type;
-    self.body=body;
+    self.parameter=parameter;
     if ([error isKindOfClass:NSString.class]||[error isKindOfClass:NSNumber.class]){
         self.error=[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorUnknown userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString([error description], nil)}];
     }else if ([error isKindOfClass:NSDictionary.class]){
@@ -65,7 +65,7 @@
     message[@"to"]=self.to;
     message[@"id"]=self.mid;
     message[@"type"]=self.type;
-    message[@"body"]=self.body;
+    message[@"parameter"]=self.parameter;
     if (self.error.code!=0){
         NSMutableDictionary *error=[NSMutableDictionary dictionary];
         error[@"domain"]=self.error.domain;

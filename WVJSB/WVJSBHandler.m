@@ -23,7 +23,7 @@
 - (WVJSBHandler*)onEvent:(WVJSBOnEventBlock)onEvent{
     if (self.onEvent) return self;
     self.onEvent = ^id (WVJSBConnection *connection,WVJSBMessage* _Nullable message, WVJSBAckBlock(^done)(void)) {
-        return onEvent(connection,message.body,done);
+        return onEvent(connection,message.parameter,done);
     };
     return self;
 }

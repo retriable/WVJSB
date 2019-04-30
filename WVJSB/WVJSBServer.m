@@ -170,7 +170,7 @@ NSString * const WVJSBSendFormat=@";                    \
     NSString *from=event.from;
     NSString *to=event.to;
     NSString *type=event.type;
-    id parameter=event.body;
+    id parameter=event.parameter;
     NSError *error=event.error;
     if (!from){
         //window did unload
@@ -202,7 +202,7 @@ NSString * const WVJSBSendFormat=@";                    \
                     v.from=self.ns;
                     v.to=from;
                     v.type=type;
-                    v.body=parameter;
+                    v.parameter=parameter;
                     v;
                 }) completion:^(BOOL success) {
                     if (success) return;
@@ -261,7 +261,7 @@ NSString * const WVJSBSendFormat=@";                    \
     }
     WVJSBHandler *handler=self.handlers[type];
     if (!handler) return;
-    NSString *key=[NSString stringWithFormat:@"%@-%@",to,mid];
+    NSString *key=[NSString stringWithFormat:@"%@-%@",from,mid];
     id context;
     if (handler.onEvent){
         context=handler.onEvent(self.connections[from],event, ^{
@@ -275,7 +275,7 @@ NSString * const WVJSBSendFormat=@";                    \
                     v.to=from;
                     v.mid=mid;
                     v.type=@"ack";
-                    v.body=result;
+                    v.parameter=result;
                     v.error=error;
                     v;
                 }) completion:nil];
