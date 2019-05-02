@@ -37,7 +37,7 @@
     ```
 
 2. Inspect URL
-   1. UIWebView
+   * UIWebView
 
         ```obj-c
         - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -45,7 +45,7 @@
         }
         ```
 
-   2. WKWebView
+   * WKWebView
 
         ```obj-c
         - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
