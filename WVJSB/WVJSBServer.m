@@ -290,7 +290,7 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
     @synchronized (self.connections) {
         connection=self.connections[from];
     }
-    NSString *key=[NSString stringWithFormat:@"%@-%@",to,mid];
+    NSString *key=[NSString stringWithFormat:@"%@-%@",from,mid];
     id context;
     if (handler.event){
         context=handler.event(connection,event.parameter, ^{
