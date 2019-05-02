@@ -135,6 +135,7 @@
     ```js
     client.on('method').onEvent(function(parameter,done){
         done();
+        return null;
     })
     ```
 
