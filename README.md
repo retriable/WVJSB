@@ -32,14 +32,14 @@
 1. Create server
     > Server is automatically associated with the web view.
 
-    ```swift
+    ```obj-c
         WVJSBServer *server=[WVJSBServer serverWithWebView:webView namespace:@"server namespace"];
     ```
 
 2. Inspect URL
    1. UIWebView
 
-        ```swift
+        ```obj-c
         - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
             return [WVJSBServer canHandleWithWebView:webView URLString:request.URL.absoluteString];
         }
@@ -47,7 +47,7 @@
 
    2. WKWebView
 
-        ```swift
+        ```obj-c
         - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
         decisionHandler([WVJSBServer canHandleWithWebView:webView URLString:navigationAction.request.URL.absoluteString]?WKNavigationActionPolicyCancel:WKNavigationActionPolicyAllow);
         }
@@ -55,7 +55,7 @@
 
 *  Handle unresponsive request
 
-    ```swift
+    ```obj-c
     [[server on:@"method"] onEvent:^id(WVJSBConnection * connection, id parameter, WVJSBAckBlock (^done)(void)) {
         done();
         return nil;
@@ -64,7 +64,7 @@
 
 * Handle responsive request
 
-    ```swift
+    ```obj-c
     [[server on:@"request"] onEvent:^id(WVJSBConnection * connection, id parameter, WVJSBAckBlock (^done)(void)) {
         done()(@"response object",nil);
         return nil;
@@ -73,7 +73,7 @@
 
 * Handle cancelable request
 
-    ```swift
+    ```obj-c
     [[[server on:@"request"] onEvent:^id (WVJSBConnection * connection, id parameter, WVJSBAckBlock (^done)(void)) {
         //Simulate asynchronous request
         dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
@@ -93,7 +93,7 @@
 
 * Request to JavaScript client
 
-    ```swift
+    ```obj-c
     //get a target connection
     WVJSBConnection *connection =  server.connections.allValues.lastObject;
     WVJSBOperation *operation = [[[connection event:@"request" parameter:nil] onAck:^(WVJSBOperation *operation,id result, NSError *error) {
@@ -103,7 +103,7 @@
 
 * Cancel request
 
-    ```swift
+    ```obj-c
     [operation cancel];
     ```
 
