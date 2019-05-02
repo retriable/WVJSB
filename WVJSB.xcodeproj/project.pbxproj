@@ -7,39 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92918A6227AC3CA0086226F /* WVJSBConnectionImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918A4227AC3CA0086226F /* WVJSBConnectionImpl.h */; };
+		C92918A7227AC3CA0086226F /* WVJSBConnectionImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918A4227AC3CA0086226F /* WVJSBConnectionImpl.h */; };
+		C92918A8227AC3CA0086226F /* WVJSBConnectionImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C92918A5227AC3CA0086226F /* WVJSBConnectionImpl.m */; };
+		C92918A9227AC3CA0086226F /* WVJSBConnectionImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C92918A5227AC3CA0086226F /* WVJSBConnectionImpl.m */; };
+		C92918AC227AC3F30086226F /* WVJSBOperationImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918AA227AC3F30086226F /* WVJSBOperationImpl.h */; };
+		C92918AD227AC3F30086226F /* WVJSBOperationImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918AA227AC3F30086226F /* WVJSBOperationImpl.h */; };
+		C92918AE227AC3F30086226F /* WVJSBOperationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C92918AB227AC3F30086226F /* WVJSBOperationImpl.m */; };
+		C92918AF227AC3F30086226F /* WVJSBOperationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C92918AB227AC3F30086226F /* WVJSBOperationImpl.m */; };
+		C92918B2227AC5660086226F /* WVJSBHandlerImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918B0227AC5660086226F /* WVJSBHandlerImpl.h */; };
+		C92918B3227AC5660086226F /* WVJSBHandlerImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918B0227AC5660086226F /* WVJSBHandlerImpl.h */; };
+		C92918B4227AC5660086226F /* WVJSBHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C92918B1227AC5660086226F /* WVJSBHandlerImpl.m */; };
+		C92918B5227AC5660086226F /* WVJSBHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C92918B1227AC5660086226F /* WVJSBHandlerImpl.m */; };
+		C92918B8227AC6CB0086226F /* WVJSBDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918B6227AC6CB0086226F /* WVJSBDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C92918B9227AC6CB0086226F /* WVJSBDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = C92918B6227AC6CB0086226F /* WVJSBDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C92918BC227ACF7C0086226F /* WVJSBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBF9225C3625007383E5 /* WVJSBServer.m */; };
+		C92918BD227ACF7D0086226F /* WVJSBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBF9225C3625007383E5 /* WVJSBServer.m */; };
 		C9D7FBE3225C3575007383E5 /* WVJSB.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBE1225C3575007383E5 /* WVJSB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9D7FC06225C3625007383E5 /* WVJSBOperation+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBF6225C3625007383E5 /* WVJSBOperation+Private.h */; };
-		C9D7FC07225C3625007383E5 /* WVJSBOperation+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBF6225C3625007383E5 /* WVJSBOperation+Private.h */; };
 		C9D7FC08225C3625007383E5 /* WVJSBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBF7225C3625007383E5 /* WVJSBMessage.m */; };
 		C9D7FC09225C3625007383E5 /* WVJSBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBF7225C3625007383E5 /* WVJSBMessage.m */; };
 		C9D7FC0A225C3625007383E5 /* WVJSBServer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBF8225C3625007383E5 /* WVJSBServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9D7FC0B225C3625007383E5 /* WVJSBServer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBF8225C3625007383E5 /* WVJSBServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9D7FC0C225C3625007383E5 /* WVJSBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBF9225C3625007383E5 /* WVJSBServer.m */; };
-		C9D7FC0D225C3625007383E5 /* WVJSBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBF9225C3625007383E5 /* WVJSBServer.m */; };
-		C9D7FC0E225C3625007383E5 /* WVJSBConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFA225C3625007383E5 /* WVJSBConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9D7FC0F225C3625007383E5 /* WVJSBConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFA225C3625007383E5 /* WVJSBConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9D7FC10225C3625007383E5 /* WVJSBConnection+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFB225C3625007383E5 /* WVJSBConnection+Private.h */; };
-		C9D7FC11225C3625007383E5 /* WVJSBConnection+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFB225C3625007383E5 /* WVJSBConnection+Private.h */; };
-		C9D7FC12225C3625007383E5 /* WVJSBServer+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFC225C3625007383E5 /* WVJSBServer+Private.h */; };
-		C9D7FC13225C3625007383E5 /* WVJSBServer+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFC225C3625007383E5 /* WVJSBServer+Private.h */; };
-		C9D7FC14225C3625007383E5 /* WVJSBHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFD225C3625007383E5 /* WVJSBHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9D7FC15225C3625007383E5 /* WVJSBHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFD225C3625007383E5 /* WVJSBHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9D7FC16225C3625007383E5 /* WVJSBScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFE225C3625007383E5 /* WVJSBScriptMessageHandler.h */; };
 		C9D7FC17225C3625007383E5 /* WVJSBScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBFE225C3625007383E5 /* WVJSBScriptMessageHandler.h */; };
 		C9D7FC18225C3625007383E5 /* WVJSBScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBFF225C3625007383E5 /* WVJSBScriptMessageHandler.m */; };
 		C9D7FC19225C3625007383E5 /* WVJSBScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FBFF225C3625007383E5 /* WVJSBScriptMessageHandler.m */; };
-		C9D7FC1A225C3625007383E5 /* WVJSBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FC00225C3625007383E5 /* WVJSBHandler.m */; };
-		C9D7FC1B225C3625007383E5 /* WVJSBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FC00225C3625007383E5 /* WVJSBHandler.m */; };
-		C9D7FC1C225C3625007383E5 /* WVJSBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FC01225C3625007383E5 /* WVJSBConnection.m */; };
-		C9D7FC1D225C3625007383E5 /* WVJSBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FC01225C3625007383E5 /* WVJSBConnection.m */; };
-		C9D7FC1E225C3625007383E5 /* WVJSBHandler+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FC02225C3625007383E5 /* WVJSBHandler+Private.h */; };
-		C9D7FC1F225C3625007383E5 /* WVJSBHandler+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FC02225C3625007383E5 /* WVJSBHandler+Private.h */; };
-		C9D7FC20225C3625007383E5 /* WVJSBOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FC03225C3625007383E5 /* WVJSBOperation.m */; };
-		C9D7FC21225C3625007383E5 /* WVJSBOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7FC03225C3625007383E5 /* WVJSBOperation.m */; };
 		C9D7FC22225C3625007383E5 /* WVJSBMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FC04225C3625007383E5 /* WVJSBMessage.h */; };
 		C9D7FC23225C3625007383E5 /* WVJSBMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FC04225C3625007383E5 /* WVJSBMessage.h */; };
-		C9D7FC24225C3625007383E5 /* WVJSBOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FC05225C3625007383E5 /* WVJSBOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9D7FC25225C3625007383E5 /* WVJSBOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FC05225C3625007383E5 /* WVJSBOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9D7FC2C225C435B007383E5 /* Proxy.js in Resources */ = {isa = PBXBuildFile; fileRef = C9D7FC29225C435B007383E5 /* Proxy.js */; };
 		C9D7FC2D225C435B007383E5 /* Proxy.js in Resources */ = {isa = PBXBuildFile; fileRef = C9D7FC29225C435B007383E5 /* Proxy.js */; };
 		C9D7FC2F225C4F59007383E5 /* WVJSB.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D7FBE1225C3575007383E5 /* WVJSB.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -104,26 +98,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C92918A4227AC3CA0086226F /* WVJSBConnectionImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSBConnectionImpl.h; sourceTree = "<group>"; };
+		C92918A5227AC3CA0086226F /* WVJSBConnectionImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WVJSBConnectionImpl.m; sourceTree = "<group>"; };
+		C92918AA227AC3F30086226F /* WVJSBOperationImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSBOperationImpl.h; sourceTree = "<group>"; };
+		C92918AB227AC3F30086226F /* WVJSBOperationImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WVJSBOperationImpl.m; sourceTree = "<group>"; };
+		C92918B0227AC5660086226F /* WVJSBHandlerImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSBHandlerImpl.h; sourceTree = "<group>"; };
+		C92918B1227AC5660086226F /* WVJSBHandlerImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WVJSBHandlerImpl.m; sourceTree = "<group>"; };
+		C92918B6227AC6CB0086226F /* WVJSBDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSBDefine.h; sourceTree = "<group>"; };
 		C9D7FBDE225C3575007383E5 /* WVJSB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WVJSB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D7FBE1225C3575007383E5 /* WVJSB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSB.h; sourceTree = "<group>"; };
 		C9D7FBE2225C3575007383E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9D7FBEE225C35A9007383E5 /* WVJSB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WVJSB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9D7FBF6225C3625007383E5 /* WVJSBOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WVJSBOperation+Private.h"; sourceTree = "<group>"; };
 		C9D7FBF7225C3625007383E5 /* WVJSBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WVJSBMessage.m; sourceTree = "<group>"; };
 		C9D7FBF8225C3625007383E5 /* WVJSBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WVJSBServer.h; sourceTree = "<group>"; };
 		C9D7FBF9225C3625007383E5 /* WVJSBServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WVJSBServer.m; sourceTree = "<group>"; };
-		C9D7FBFA225C3625007383E5 /* WVJSBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WVJSBConnection.h; sourceTree = "<group>"; };
-		C9D7FBFB225C3625007383E5 /* WVJSBConnection+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WVJSBConnection+Private.h"; sourceTree = "<group>"; };
 		C9D7FBFC225C3625007383E5 /* WVJSBServer+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WVJSBServer+Private.h"; sourceTree = "<group>"; };
-		C9D7FBFD225C3625007383E5 /* WVJSBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WVJSBHandler.h; sourceTree = "<group>"; };
 		C9D7FBFE225C3625007383E5 /* WVJSBScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WVJSBScriptMessageHandler.h; sourceTree = "<group>"; };
 		C9D7FBFF225C3625007383E5 /* WVJSBScriptMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WVJSBScriptMessageHandler.m; sourceTree = "<group>"; };
-		C9D7FC00225C3625007383E5 /* WVJSBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WVJSBHandler.m; sourceTree = "<group>"; };
-		C9D7FC01225C3625007383E5 /* WVJSBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WVJSBConnection.m; sourceTree = "<group>"; };
-		C9D7FC02225C3625007383E5 /* WVJSBHandler+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WVJSBHandler+Private.h"; sourceTree = "<group>"; };
-		C9D7FC03225C3625007383E5 /* WVJSBOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WVJSBOperation.m; sourceTree = "<group>"; };
 		C9D7FC04225C3625007383E5 /* WVJSBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WVJSBMessage.h; sourceTree = "<group>"; };
-		C9D7FC05225C3625007383E5 /* WVJSBOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WVJSBOperation.h; sourceTree = "<group>"; };
 		C9D7FC28225C435B007383E5 /* Client.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Client.js; sourceTree = "<group>"; };
 		C9D7FC29225C435B007383E5 /* Proxy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Proxy.js; sourceTree = "<group>"; };
 		C9D7FC34225C6CCD007383E5 /* WVJSB iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WVJSB iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,20 +199,18 @@
 		C9D7FBE0225C3575007383E5 /* WVJSB */ = {
 			isa = PBXGroup;
 			children = (
-				C9D7FC2E225C436A007383E5 /* Resources */,
 				C9D7FBE2225C3575007383E5 /* Info.plist */,
+				C9D7FC2E225C436A007383E5 /* Resources */,
 				C9D7FBE1225C3575007383E5 /* WVJSB.h */,
-				C9D7FBFA225C3625007383E5 /* WVJSBConnection.h */,
-				C9D7FC01225C3625007383E5 /* WVJSBConnection.m */,
-				C9D7FBFB225C3625007383E5 /* WVJSBConnection+Private.h */,
-				C9D7FBFD225C3625007383E5 /* WVJSBHandler.h */,
-				C9D7FC00225C3625007383E5 /* WVJSBHandler.m */,
-				C9D7FC02225C3625007383E5 /* WVJSBHandler+Private.h */,
+				C92918A4227AC3CA0086226F /* WVJSBConnectionImpl.h */,
+				C92918A5227AC3CA0086226F /* WVJSBConnectionImpl.m */,
+				C92918B6227AC6CB0086226F /* WVJSBDefine.h */,
+				C92918B0227AC5660086226F /* WVJSBHandlerImpl.h */,
+				C92918B1227AC5660086226F /* WVJSBHandlerImpl.m */,
 				C9D7FC04225C3625007383E5 /* WVJSBMessage.h */,
 				C9D7FBF7225C3625007383E5 /* WVJSBMessage.m */,
-				C9D7FC05225C3625007383E5 /* WVJSBOperation.h */,
-				C9D7FC03225C3625007383E5 /* WVJSBOperation.m */,
-				C9D7FBF6225C3625007383E5 /* WVJSBOperation+Private.h */,
+				C92918AA227AC3F30086226F /* WVJSBOperationImpl.h */,
+				C92918AB227AC3F30086226F /* WVJSBOperationImpl.m */,
 				C9D7FBFE225C3625007383E5 /* WVJSBScriptMessageHandler.h */,
 				C9D7FBFF225C3625007383E5 /* WVJSBScriptMessageHandler.m */,
 				C9D7FBF8225C3625007383E5 /* WVJSBServer.h */,
@@ -295,16 +285,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9D7FC24225C3625007383E5 /* WVJSBOperation.h in Headers */,
 				C9D7FC0A225C3625007383E5 /* WVJSBServer.h in Headers */,
-				C9D7FC0E225C3625007383E5 /* WVJSBConnection.h in Headers */,
-				C9D7FC12225C3625007383E5 /* WVJSBServer+Private.h in Headers */,
+				C92918AC227AC3F30086226F /* WVJSBOperationImpl.h in Headers */,
 				C9D7FC22225C3625007383E5 /* WVJSBMessage.h in Headers */,
-				C9D7FC10225C3625007383E5 /* WVJSBConnection+Private.h in Headers */,
-				C9D7FC1E225C3625007383E5 /* WVJSBHandler+Private.h in Headers */,
+				C92918B8227AC6CB0086226F /* WVJSBDefine.h in Headers */,
+				C92918B2227AC5660086226F /* WVJSBHandlerImpl.h in Headers */,
+				C92918A6227AC3CA0086226F /* WVJSBConnectionImpl.h in Headers */,
 				C9D7FBE3225C3575007383E5 /* WVJSB.h in Headers */,
-				C9D7FC06225C3625007383E5 /* WVJSBOperation+Private.h in Headers */,
-				C9D7FC14225C3625007383E5 /* WVJSBHandler.h in Headers */,
 				C9D7FC16225C3625007383E5 /* WVJSBScriptMessageHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,16 +301,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D7FC2F225C4F59007383E5 /* WVJSB.h in Headers */,
-				C9D7FC0F225C3625007383E5 /* WVJSBConnection.h in Headers */,
 				C9D7FC0B225C3625007383E5 /* WVJSBServer.h in Headers */,
 				C9D7FC17225C3625007383E5 /* WVJSBScriptMessageHandler.h in Headers */,
-				C9D7FC25225C3625007383E5 /* WVJSBOperation.h in Headers */,
-				C9D7FC13225C3625007383E5 /* WVJSBServer+Private.h in Headers */,
-				C9D7FC07225C3625007383E5 /* WVJSBOperation+Private.h in Headers */,
-				C9D7FC15225C3625007383E5 /* WVJSBHandler.h in Headers */,
-				C9D7FC1F225C3625007383E5 /* WVJSBHandler+Private.h in Headers */,
+				C92918AD227AC3F30086226F /* WVJSBOperationImpl.h in Headers */,
+				C92918B9227AC6CB0086226F /* WVJSBDefine.h in Headers */,
+				C92918B3227AC5660086226F /* WVJSBHandlerImpl.h in Headers */,
+				C92918A7227AC3CA0086226F /* WVJSBConnectionImpl.h in Headers */,
 				C9D7FC23225C3625007383E5 /* WVJSBMessage.h in Headers */,
-				C9D7FC11225C3625007383E5 /* WVJSBConnection+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,11 +477,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D7FC18225C3625007383E5 /* WVJSBScriptMessageHandler.m in Sources */,
-				C9D7FC1A225C3625007383E5 /* WVJSBHandler.m in Sources */,
+				C92918B4227AC5660086226F /* WVJSBHandlerImpl.m in Sources */,
 				C9D7FC08225C3625007383E5 /* WVJSBMessage.m in Sources */,
-				C9D7FC0C225C3625007383E5 /* WVJSBServer.m in Sources */,
-				C9D7FC20225C3625007383E5 /* WVJSBOperation.m in Sources */,
-				C9D7FC1C225C3625007383E5 /* WVJSBConnection.m in Sources */,
+				C92918A8227AC3CA0086226F /* WVJSBConnectionImpl.m in Sources */,
+				C92918AE227AC3F30086226F /* WVJSBOperationImpl.m in Sources */,
+				C92918BC227ACF7C0086226F /* WVJSBServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,11 +490,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D7FC19225C3625007383E5 /* WVJSBScriptMessageHandler.m in Sources */,
-				C9D7FC1B225C3625007383E5 /* WVJSBHandler.m in Sources */,
+				C92918B5227AC5660086226F /* WVJSBHandlerImpl.m in Sources */,
 				C9D7FC09225C3625007383E5 /* WVJSBMessage.m in Sources */,
-				C9D7FC0D225C3625007383E5 /* WVJSBServer.m in Sources */,
-				C9D7FC21225C3625007383E5 /* WVJSBOperation.m in Sources */,
-				C9D7FC1D225C3625007383E5 /* WVJSBConnection.m in Sources */,
+				C92918A9227AC3CA0086226F /* WVJSBConnectionImpl.m in Sources */,
+				C92918AF227AC3F30086226F /* WVJSBOperationImpl.m in Sources */,
+				C92918BD227ACF7D0086226F /* WVJSBServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

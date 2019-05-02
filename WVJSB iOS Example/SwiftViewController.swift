@@ -10,7 +10,11 @@ import UIKit
 import WVJSB
 
 class SwiftViewController: UIViewController,UIWebViewDelegate {
-    var operation:WVJSBOperation?
+    
+    var operations:Array<WVJSBOperation> = Array<WVJSBOperation>()
+    
+    var connections:Array<WVJSBConnection> = Array<WVJSBConnection>()
+    
     @IBOutlet weak var webView: UIWebView!
     
     override func viewDidLoad() {
@@ -45,37 +49,67 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
     }
     
     @IBAction func immediate(_ sender: Any){
-        let server=WVJSBServer(webView: webView!, ns: nil)
-        for (_,connection) in server.connections{
-            connection.event(type:"immediate", parameter: nil).onAck { (operation, parameter, error) in
+        objc_sync_enter(connections)
+        for (connection) in connections{
+            let operation = connection.event(type:"immediate", parameter: nil).onAck {[weak self] operation ,parameter, error in
                 if  error != nil {
                     NSLog("did receive immediate error: \(error!)")
                 }else{
                     NSLog("did receive immediate ack: \(parameter! as AnyObject)")
                 }
-                }.timeout(10)
+                if var opts = self?.operations{
+                    objc_sync_enter(opts)
+                    if let idx=opts.firstIndex(where: { (o) -> Bool in
+                        return o.isEqual(operation)
+                    }){
+                        opts.remove(at: idx);
+                    }
+                    objc_sync_exit(opts)
+                }
+            }.timeout(10)
+            objc_sync_enter(operations)
+            operations.append(operation)
+            objc_sync_exit(operations)
         }
+        objc_sync_exit(connections)
     }
     @IBAction func delayed(_ sender: Any){
-        let server=WVJSBServer(webView: webView!, ns: nil)
-        for (_,connection) in server.connections{
-            self.operation?.cancel()
-            self.operation = connection.event(type:"delayed", parameter: nil).onAck { (operation, parameter, error) in
-                if error != nil{
+        objc_sync_enter(connections)
+        for (connection) in connections{
+            let operation = connection.event(type:"delayed", parameter: nil).onAck {[weak self] operation, parameter, error in
+                if  error != nil {
                     NSLog("did receive delayed error: \(error!)")
                 }else{
                     NSLog("did receive delayed ack: \(parameter! as AnyObject)")
                 }
-                self.operation=nil
+                if var opts = self?.operations{
+                    objc_sync_enter(opts)
+                    if let idx=opts.firstIndex(where: { (o) -> Bool in
+                        return o.isEqual(operation)
+                    }){
+                        opts.remove(at: idx);
+                    }
+                    objc_sync_exit(opts)
+                }
                 }.timeout(10)
+            objc_sync_enter(operations)
+            operations.append(operation)
+            objc_sync_exit(operations)
         }
+        objc_sync_exit(connections)
     }
+    
     @IBAction func cancel(_ sender: Any) {
-        operation?.cancel();
+        objc_sync_enter(operations)
+        for (operation) in operations{
+            operation.cancel();
+        }
+        operations.removeAll();
+        objc_sync_exit(operations)
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        return !WVJSBServer.canHandle(webView: webView, request: request)
+        return !WVJSBServer.canHandle(webView: webView, URLString: request.url?.absoluteString);
     }
     /*
     // MARK: - Navigation

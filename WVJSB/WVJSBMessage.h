@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy  ,nullable) NSString *type;
 @property (nonatomic,copy  ,nullable) NSString *from;
 @property (nonatomic,copy  ,nullable) NSString *to;
-@property (nonatomic,strong,nullable) id       body;
+@property (nonatomic,strong,nullable) id       parameter;
 @property (nonatomic,strong,nullable) NSError  *error;
 
 - (instancetype)initWithString:(NSString*)string;

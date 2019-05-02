@@ -15,7 +15,6 @@
 
 @implementation WVJSBScriptMessageHandler
 
-
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     [[WVJSBServer serverWithWebView:message.webView namespace:message.name flag:NO] handleMessage:message.body];
 }

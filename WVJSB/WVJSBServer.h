@@ -11,27 +11,20 @@
 #endif
 #import <WebKit/WebKit.h>
 
+#import "WVJSBDefine.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-@class WVJSBHandler;
-@class WVJSBServer;
-@class WVJSBConnection;
-@class WVJSBOperation;
-
-typedef void (^WVJSBOnCancelBlock)(id _Nullable context);
-typedef void (^WVJSBOperationAckBlock)(WVJSBOperation *operation, id _Nullable result, NSError * _Nullable error);
-typedef void (^WVJSBAckBlock)(id _Nullable result, NSError *_Nullable error);
-typedef id _Nullable (^WVJSBOnEventBlock)(WVJSBConnection *connection, id _Nullable parameter, WVJSBAckBlock(^done)(void));
 
 @interface WVJSBServer : NSObject
 
-@property (readonly) NSDictionary<NSString*,WVJSBConnection*> *connections;
-
 + (instancetype)serverWithWebView:(id)webView namespace:(NSString* _Nullable)ns NS_SWIFT_NAME(init(webView:ns:));
 
-+ (BOOL)canHandleWithWebView:(id)webView request:(NSURLRequest*)request NS_SWIFT_NAME(canHandle(webView:request:));
++ (BOOL)canHandleWithWebView:(id)webView URLString:(NSString*_Nullable)URLString NS_SWIFT_NAME(canHandle(webView:URLString:));
 
-- (WVJSBHandler*)on:(NSString*)type;
+- (id<WVJSBHandler>)on:(NSString*)type;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

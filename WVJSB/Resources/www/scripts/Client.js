@@ -1,5 +1,6 @@
 const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 	const clientKey = namespace + '_wvjsb_client';
+	const proxyKey = namespace + '_wvjsb_proxy';
 
 	function getClient() {
 		return window[clientKey];
@@ -76,6 +77,7 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 		}
 	}
 
+
 	function finishAllOperation() {
 		for (let id in operations) {
 			const operation = operations[id];
@@ -88,26 +90,12 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 			const handler = {
 				onEvent: function(func) {
 					const handler = this;
-					handler._onEvent = function({
-						id, parameter
-					}, ack) {
-						const context = func(parameter, function() {
-							delete cancels[id];
-							return ack;
-						});
-						cancels[id] = function() {
-							const func = handler._onCancel;
-							if (func) func(context);
-							delete cancels[id];
-						}
-						return context;
-					}
+					handler.event = func;
 					return handler;
 				},
 				onCancel: function(func) {
-					this._onCancel = function(context) {
-						func(context);
-					}
+					const handler = this;
+					handler.cancel = func;
 				}
 			};
 			handlers[type] = handler;
@@ -122,8 +110,10 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 				onAck: function(func) {
 					const operation = this;
 					if (operation.ok) return;
+					operation.ack = function(result,error){
+						func(operation,result,error);
+					};
 					operations[id] = operation;
-					operation._onAck = func;
 					return operation;
 				},
 				timeout: function(timeout) {
@@ -132,10 +122,14 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 					operation.timer = window.setTimeout(function() {
 						if (operation.ok) return;
 						operation.ok = true;
-						delete operation.timer;
 						delete operations[id];
-						const onAck = operation._onAck;
-						if (onAck) onAck(operation,null, error.timedOut);
+						const timer = operation.timer;
+						if (timer){
+							window.clearTimeout(timer);
+							delete operation.timer;
+						}
+						const ack = operation.ack;
+						if (ack) ack(null, error.timedOut);
 					}, timeout);
 					return operation;
 				},
@@ -149,8 +143,8 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 						window.clearTimeout(timer);
 						delete operation.timer;
 					}
-					const onAck = operation._onAck;
-					if (onAck) onAck(operation,null, error.cancelled);
+					const ack = operation.ack;
+					if (ack) ack(null, error.cancelled);
 
 				},
 				_ack: function(result, error) {
@@ -163,8 +157,8 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 						window.clearTimeout(timer);
 						delete operation.timer;
 					}
-					const onAck = operation._onAck;
-					if (onAck) onAck(operation,result, error);
+					const ack = operation.ack;
+					if (ack) ack(result, error);
 				},
 				_start: function() {
 					if (!connected) return;
@@ -192,50 +186,62 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 			const {
 				id, from, to, type, parameter, error
 			} = message;
-			if (!from) {
-				connect();
+			if (proxyKey==from) {
+				if ('connect'==type){
+					if (true==connected){
+						connected=false;
+					}
+					connect();
+				}else if("disconnect"==type){
+					if (true==connected){
+						connected=false;
+						finishAllOperation();
+					}
+				}
 				return;
 			}
 			if (to != clientId) return;
 			if (from != namespace) return;
-			if (type == 'connect') {
+			if ('connect' == type) {
 				if (connected == true) return;
 				connected = true;
 				startAllOperation();
 				const handler = handlers[type];
 				if (!handler) return;
-				handler._onEvent(message, function() {});
+				handler.event(null,function(){
+					return function(_,_){}
+				});
 				return;
 			}
-			if (type == 'cancel') {
+			if ('cancel' == type) {
 				const cancel = cancels[id];
 				if (cancel) cancel();
-				const handler = handlers[type];
-				if (!handler) return;
-				handler._onEvent(message, function() {});
 				return;
 			}
-			if (type == 'ack') {
+			if ('ack' == type) {
 				const operation = operations[id];
 				if (!operation) return;
 				if (operation) operation._ack(parameter, error);
-				const handler = handlers[type];
-				if (!handler) return;
-				handler._onEvent(message, function() {});
 				return;
 			}
 			const handler = handlers[type];
 			if (!handler) return;
-			handler._onEvent(message, function(result, error) {
-				sendToProxy({
-					id: id,
-					from: clientId,
-					to: from,
-					type: 'ack',
-					parameter: result,
-					error: error
-				});
+			const context = handler.event(message.parameter, function() {
+				delete cancels[id];
+				return function(result,error){
+					sendToProxy({
+						id: id,
+						from: clientId,
+						to: from,
+						type: 'ack',
+						parameter: result,
+						error: error
+					});
+				}
 			});
+			cancels[id]=function (){
+				handler.cancel(context);
+			}
 		} catch (e) {}
 	});
 

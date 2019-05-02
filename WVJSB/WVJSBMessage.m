@@ -7,13 +7,11 @@
 //
 
 #import "WVJSBMessage.h"
-#import "WVJSBServer+Private.h"
 
 @implementation WVJSBMessage
 
 - (instancetype)initWithString:(NSString *)string{
-    if (WVJSBIsStringEmpty(string)){
-        NSParameterAssert(0);
+    if (string.length==0){
         return nil;
     }
     NSError *e;
@@ -27,14 +25,14 @@
     NSString *to=message[@"to"];
     NSString *type=message[@"type"];
     id error=message[@"error"];
-    id body = message[@"body"];
+    id parameter = message[@"parameter"];
     self=[self init];
     if (!self) return nil;
     self.from=from;
     self.to=to;
     self.mid=mid;
     self.type=type;
-    self.body=body;
+    self.parameter=parameter;
     if ([error isKindOfClass:NSString.class]||[error isKindOfClass:NSNumber.class]){
         self.error=[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorUnknown userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString([error description], nil)}];
     }else if ([error isKindOfClass:NSDictionary.class]){
@@ -48,24 +46,12 @@
 }
 
 - (NSString*)string{
-    if (WVJSBIsStringEmpty(self.from)){
-        NSParameterAssert(0);
-        return nil;
-    }
-    if (WVJSBIsStringEmpty(self.to)){
-        NSParameterAssert(0);
-        return nil;
-    }
-    if (WVJSBIsStringEmpty(self.type)){
-        NSParameterAssert(0);
-        return nil;
-    }
     NSMutableDictionary *message=[NSMutableDictionary dictionary];
     message[@"from"]=self.from;
     message[@"to"]=self.to;
     message[@"id"]=self.mid;
     message[@"type"]=self.type;
-    message[@"body"]=self.body;
+    message[@"parameter"]=self.parameter;
     if (self.error.code!=0){
         NSMutableDictionary *error=[NSMutableDictionary dictionary];
         error[@"domain"]=self.error.domain;

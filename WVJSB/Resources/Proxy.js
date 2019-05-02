@@ -10,6 +10,7 @@
 	function setProxy(proxy) {
 		window[proxyKey] = proxy;
 	};
+
 	let proxy = getProxy();
 	if (proxy) return 'wvjsb proxy was already installed';
 	const queryURL = 'https://wvjsb/' + namespace + '/query';
@@ -94,7 +95,6 @@
 		} catch (e) {}
 	});
 
-
 	function broadcast(wd, data) {
 		wd.postMessage(data, '*');
 		const frames = wd.frames;
@@ -105,17 +105,21 @@
 
 	function proxyConnect() {
 		const data = {};
-		data[namespace] = {};
+		data[namespace] = {from:proxyKey,type:'connect'};
 		broadcast(window, data);
 	}
 
 	function proxyDisconnect() {
-		sendToServer({});
+		sendToServer({from:proxyKey,to:namespace,type:'disconnect'});
+		const data = {};
+		data[namespace] = {from:proxyKey,type:'disconnect'};
+		broadcast(window, data);
 	}
 
 	window.addEventListener('unload', function() {
 		proxyDisconnect();
 	});
+
 	proxyConnect();
 	return 'wvjsb proxy was installed';
 })();
