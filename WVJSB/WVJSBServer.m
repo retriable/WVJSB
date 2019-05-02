@@ -14,7 +14,7 @@
 #import "WVJSBServer.h"
 #import "WVJSBServer+Private.h"
 
-NSString * const WVJSBQueryFormat=@";(function(){try{return window['%@_wvjsb_proxy'].query();}catch(e){return []};})();";
+NSString * const WVJSBQueryFormat=@";(function(){try{return window['%@_wvjsb_proxy'].query();}catch(e){return '[]'};})();";
 
 NSString * const WVJSBSendFormat=@";(function(){try{return window['%@_wvjsb_proxy'].send('%@');}catch(e){return ''};})();";
 
@@ -174,10 +174,18 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
         return;
     }
     NSString *to=event.to;
-    if (![self.ns isEqualToString:to]) return;
-    NSString *mid=event.mid;
     NSString *from=event.from;
     NSString *type=event.type;
+    if (from.length==0){
+        return;
+    }
+    if (type.length==0){
+        return;
+    }
+    if (![self.ns isEqualToString:to]) {
+        return;
+    }
+    NSString *mid=event.mid;
     id parameter=event.parameter;
     NSError *error=event.error;
     if ([self.proxy isEqualToString:from]){
@@ -204,7 +212,7 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
         @synchronized (self.connections) {
             connection=self.connections[from];
             if (!connection) return;
-            [self.connections removeObjectForKey:from];
+            self.connections[from]=nil;
         }
         WVJSBHandlerImpl *handler;
         @synchronized (self.handlers) {
@@ -224,27 +232,27 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
             if (connection) return;
             connection=({
                 WVJSBConnectionImpl *v=[[WVJSBConnectionImpl alloc]initWithInfo:parameter];
-                __weak typeof(connection) weakConnection=v;
-                v.event=^(NSString *mid, NSString *type, id parameter) {
-                    __strong typeof(weakSelf) self=weakSelf;
-                    [self sendMessage:({
-                        WVJSBMessage *v=[[WVJSBMessage alloc]init];
-                        v.mid=mid;
-                        v.from=self.ns;
-                        v.to=from;
-                        v.type=type;
-                        v.parameter=parameter;
-                        v;
-                    }) completion:^(BOOL success) {
-                        if (success) return;
-                        [weakConnection ack:mid result:nil error:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotFindHost userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"can not find host", nil)}]];
-                    }];
-                };
                 v;
             });
-            [self.connections setObject:connection forKey:from];
-            [connection event:@"connect" parameter:nil];
+            self.connections[from]=connection;
         }
+        __weak typeof(connection) weakConnection=connection;
+        connection.send=^(NSString *mid, NSString *type, id parameter) {
+            __strong typeof(weakSelf) self=weakSelf;
+            [self sendMessage:({
+                WVJSBMessage *v=[[WVJSBMessage alloc]init];
+                v.mid=mid;
+                v.from=self.ns;
+                v.to=from;
+                v.type=type;
+                v.parameter=parameter;
+                v;
+            }) completion:^(BOOL success) {
+                if (success) return;
+                [weakConnection ack:mid result:nil error:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotFindHost userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"can not find host", nil)}]];
+            }];
+        };
+        [connection event:@"connect" parameter:nil];
         WVJSBHandlerImpl *handler;
         @synchronized (self.handlers) {
             handler=self.handlers[type];
@@ -271,11 +279,11 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
         }
         return;
     }
-    
+    NSString *cancelId=[NSString stringWithFormat:@"%@-%@",from,mid];
     if ([@"cancel" isEqualToString:type]){
         void(^cancel)(void);
         @synchronized (self.cancelBlocks) {
-            cancel=self.cancelBlocks[mid];
+            cancel=self.cancelBlocks[cancelId];
         }
         if (!cancel) return;
         cancel();
@@ -290,13 +298,12 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
     @synchronized (self.connections) {
         connection=self.connections[from];
     }
-    NSString *key=[NSString stringWithFormat:@"%@-%@",from,mid];
     id context;
     if (handler.event){
         context=handler.event(connection,event.parameter, ^{
             __strong typeof(weakSelf) self=weakSelf;
             @synchronized (self.cancelBlocks) {
-                self.cancelBlocks[key]=nil;
+                self.cancelBlocks[cancelId]=nil;
             }
             return ^(id result, NSError *error) {
                 __strong typeof(weakSelf) self=weakSelf;
@@ -313,9 +320,15 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
             };
         });
     }
-    if (handler.cancel) self.cancelBlocks[key]=^(){
-        handler.cancel(context);
-    };
+    if (handler.cancel) {
+        @synchronized (self.cancelBlocks) {
+            self.cancelBlocks[cancelId]=^(){
+                handler.cancel(context);
+                __strong typeof(weakSelf) self=weakSelf;
+                self.cancelBlocks[cancelId]=nil;
+            };
+        }
+    }
 }
 
 - (BOOL)initializeEvaluationWithWebView:(id)webView{

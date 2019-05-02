@@ -241,6 +241,7 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 			});
 			cancels[id]=function (){
 				handler.cancel(context);
+				delete cancels[id];
 			}
 		} catch (e) {}
 	});

@@ -63,9 +63,9 @@
     };
     operation.cancelBlock = ^(WVJSBOperationImpl *operation){
         __strong typeof(weakSelf) self=weakSelf;
-        self.event(mid, @"cancel", nil);
+        self.send(mid, @"cancel", nil);
     };
-    self.event(mid, type, parameter);
+    self.send(mid, type, parameter);
     return operation;
 }
 

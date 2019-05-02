@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)id info;
 
-@property (nonatomic,copy)void(^event)(NSString *mid,NSString *type,id _Nullable parameter);
+@property (nonatomic,copy)void(^send)(NSString *mid,NSString *type,id _Nullable parameter);
 
 - (WVJSBOperationImpl*)event:(NSString*)type parameter:(id _Nullable)parameter NS_SWIFT_NAME(event(type:parameter:));
 
