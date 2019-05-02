@@ -53,10 +53,27 @@
         }
         ```
 
-*  Handle unresponsive request
+*  Handle unresponsive event
 
     ```obj-c
     [[server on:@"method"] onEvent:^id(WVJSBConnection * connection, id parameter, WVJSBAckBlock (^done)(void)) {
+        done();
+        return nil;
+    }];
+    ```
+* Handle connection
+
+    ```obj-c
+    [[server on:@"connect"] onEvent:^id(WVJSBConnection * connection, id parameter, WVJSBAckBlock (^done)(void)) {
+        done();
+        return nil;
+    }];
+    ```
+
+* handle disconnection
+
+    ```obj-c
+    [[server on:@"disconnect"] onEvent:^id(WVJSBConnection * connection, id parameter, WVJSBAckBlock (^done)(void)) {
         done();
         return nil;
     }];
@@ -94,8 +111,6 @@
 * Request to JavaScript client
 
     ```obj-c
-    //get a target connection
-    WVJSBConnection *connection =  server.connections.allValues.lastObject;
     WVJSBOperation *operation = [[[connection event:@"request" parameter:nil] onAck:^(WVJSBOperation *operation,id result, NSError *error) {
         //Do something with result
     }] timeout:10];
@@ -115,7 +130,7 @@
     const client = WVJSBClient('server namespace',{"key":"value"});
     ```
 
-* Handle unresponsive request
+* Handle unresponsive event
 
     ```js
     client.on('method').onEvent(function(parameter,done){
@@ -123,11 +138,31 @@
     })
     ```
 
+* Handle server's connection
+
+    ```js
+    client.on('connect').onEvent(function(parameter,done){
+        done();
+        return null;
+    })
+    ```
+
+* Handle server's disconnection
+
+    ```js
+    client.on('disconnect').onEvent(function(parameter,done){
+        done();
+        return null;
+    })
+    ```
+
+
 * Handle responsive request
 
     ```js
     client.on('request').onEvent(function(parameter,done){
         done()('response object',null);
+        return null;
     })
     ```
 
@@ -148,7 +183,7 @@
 
     ```js
     const operation = client.event('request',null).onAck(function(operation,parameter,error){
-
+        //do something
     }).timeout(10000);
     ```
 
