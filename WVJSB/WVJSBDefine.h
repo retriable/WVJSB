@@ -26,7 +26,7 @@ typedef void (^WVJSBResultBlock)(id<WVJSBOperation> operation,id _Nullable resul
 
 @protocol WVJSBConnection <NSObject>
 
-@property (readonly)id info;
+@property (readonly)id _Nullable info;
 
 - (id<WVJSBOperation>)event:(NSString*)type parameter:(id _Nullable)parameter NS_SWIFT_NAME(event(type:parameter:));
 
@@ -43,16 +43,6 @@ typedef id _Nullable (^WVJSBEventBlock)(id<WVJSBConnection> connection, id _Null
 - (id<WVJSBHandler>)onEvent:(WVJSBEventBlock)onEvent;
 
 - (void)onCancel:(WVJSBCancelBlock)onCancel;
-
-@end
-
-@protocol WVJSBServer <NSObject>
-
-+ (instancetype)serverWithWebView:(id)webView namespace:(NSString* _Nullable)ns NS_SWIFT_NAME(init(webView:ns:));
-
-+ (BOOL)canHandleWithWebView:(id)webView request:(NSURLRequest*)request NS_SWIFT_NAME(canHandle(webView:request:));
-
-- (id<WVJSBHandler>)on:(NSString*)type;
 
 @end
 
