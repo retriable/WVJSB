@@ -87,7 +87,11 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 
 	client = {
 		on: function(type) {
-			const handler = {
+			let handler = handlers[type];
+			if (handler){
+				return handler;
+			}
+			handler = {
 				onEvent: function(func) {
 					const handler = this;
 					handler.event = func;

@@ -249,7 +249,7 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
                 v;
             }) completion:^(BOOL success) {
                 if (success) return;
-                [weakConnection ack:mid result:nil error:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotFindHost userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"can not find host", nil)}]];
+                [weakConnection ack:mid result:nil error:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorNetworkConnectionLost userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"connection lost", nil)}]];
             }];
         };
         [connection event:@"connect" parameter:nil];
