@@ -35,12 +35,27 @@
             };
             const info = 'mainframe client';
             const client=WVJSBClient('wvjsb_namespace',info);
+            client.on('connect').onEvent(function(_,done){
+                log('connect');
+                done();
+                return null;
+            });
+            client.on('disconnect').onEvent(function(_,done){
+                log('disconnect');
+                done();
+                return null;
+            });
             client.on('immediate').onEvent(function(_,done){
                 done()('immediate ack',null);
+                return null;
             })
             client.on('delayed').onEvent(function(_,done){
                 let context = window.setTimeout(function(){
-                    done()('delayed ack',null);
+                    if(Math.random()<0.5){
+                        done()(null,{code:-1003,description:'can not find host'});                        
+                    }else{
+                        done()('delayed ack',null);
+                    }
                 },2000);
                 return context;
             }).onCancel(function(context){

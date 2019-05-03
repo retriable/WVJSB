@@ -22,14 +22,18 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         webView.delegate=self
         let server=WVJSBServer(webView: webView!, ns: nil)
         server.on("immediate").onEvent { (connection, parameter, done) -> Any? in
-            done()("immediate ack",nil);
-            return nil;
+            done()("immediate ack",nil)
+            return nil
         }
         server.on("delayed").onEvent { (connection, parameter, done) -> Any? in
-            let timer = DispatchSource.makeTimerSource();
+            let timer = DispatchSource.makeTimerSource()
             timer.schedule(deadline: DispatchTime.now()+DispatchTimeInterval.seconds(2))
             timer.setEventHandler(handler: {
-                done()("delayed ack",nil);
+                if (arc4random()%2==0){
+                    done()(nil,NSError(domain: NSURLErrorDomain, code: NSURLErrorCannotFindHost, userInfo: [NSLocalizedDescriptionKey:"can not find host"]))
+                }else{
+                    done()("delayed ack",nil)
+                }
             })
             timer.resume()
             return timer
@@ -40,11 +44,10 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         reload(self)
         // Do any additional setup after loading the view.
     }
-    
 
     @IBAction func reload(_ sender: Any) {
-        let string = "http://localhost:8000/index.html";
-//        let string = "http://192.168.2.2:8000/index.html";
+        #warning("make sure the URL is consistent to your web server")
+        let string = "http://localhost:8000/index.html"
         webView.loadRequest(URLRequest(url: URL(string:string)!))
     }
     
@@ -62,7 +65,7 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
                     if let idx=opts.firstIndex(where: { (o) -> Bool in
                         return o.isEqual(operation)
                     }){
-                        opts.remove(at: idx);
+                        opts.remove(at: idx)
                     }
                     objc_sync_exit(opts)
                 }
@@ -87,7 +90,7 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
                     if let idx=opts.firstIndex(where: { (o) -> Bool in
                         return o.isEqual(operation)
                     }){
-                        opts.remove(at: idx);
+                        opts.remove(at: idx)
                     }
                     objc_sync_exit(opts)
                 }
@@ -102,14 +105,14 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
     @IBAction func cancel(_ sender: Any) {
         objc_sync_enter(operations)
         for (operation) in operations{
-            operation.cancel();
+            operation.cancel()
         }
-        operations.removeAll();
+        operations.removeAll()
         objc_sync_exit(operations)
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        return !WVJSBServer.canHandle(webView: webView, URLString: request.url?.absoluteString);
+        return !WVJSBServer.canHandle(webView: webView, URLString: request.url?.absoluteString)
     }
     /*
     // MARK: - Navigation

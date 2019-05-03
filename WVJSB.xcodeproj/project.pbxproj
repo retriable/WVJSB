@@ -105,6 +105,7 @@
 		C92918B0227AC5660086226F /* WVJSBHandlerImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSBHandlerImpl.h; sourceTree = "<group>"; };
 		C92918B1227AC5660086226F /* WVJSBHandlerImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WVJSBHandlerImpl.m; sourceTree = "<group>"; };
 		C92918B6227AC6CB0086226F /* WVJSBDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSBDefine.h; sourceTree = "<group>"; };
+		C9611E1F227C0A2E006BF981 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		C9D7FBDE225C3575007383E5 /* WVJSB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WVJSB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D7FBE1225C3575007383E5 /* WVJSB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WVJSB.h; sourceTree = "<group>"; };
 		C9D7FBE2225C3575007383E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -223,6 +224,7 @@
 		C9D7FC26225C435B007383E5 /* www */ = {
 			isa = PBXGroup;
 			children = (
+				C9611E1F227C0A2E006BF981 /* index.html */,
 				C9D7FC27225C435B007383E5 /* scripts */,
 			);
 			path = www;
@@ -847,7 +849,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.retriable.WVJSB-macOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -868,7 +870,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.retriable.WVJSB-macOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

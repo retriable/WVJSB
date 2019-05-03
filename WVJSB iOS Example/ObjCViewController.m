@@ -56,7 +56,11 @@
         dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
         dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*2), DBL_MAX, 0 * NSEC_PER_SEC);
         dispatch_source_set_event_handler(timer, ^{
-            done()(@"delayed ack",nil);
+            if (arc4random()%2){
+                done()(@"delayed ack",nil);
+            }else{
+                done()(nil,[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotFindHost userInfo:@{NSLocalizedDescriptionKey:@"can not find host"}]);
+            }
         });
         dispatch_resume(timer);
         return timer;
@@ -67,8 +71,8 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)reload:(id)sender {
+#warning make sure the URL is consistent to your web server
     NSString *URLString =@"http://localhost:8000/index.html";
-    //    NSString *URLString =@"http://192.168.2.2:8000/index.html";
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:URLString]]];
 }
 
