@@ -195,13 +195,11 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
             @synchronized (self.handlers) {
                 handler=self.handlers[@"disconnect"];
             }
-            if (handler){
-                @synchronized (self.connections) {
-                    [self.connections enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, WVJSBConnectionImpl * _Nonnull obj, BOOL * _Nonnull stop) {
-                        handler.event(obj,nil, self.emptyDone);
-                    }];
-                    [self.connections removeAllObjects];
-                }
+            @synchronized (self.connections) {
+                [self.connections enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, WVJSBConnectionImpl * _Nonnull obj, BOOL * _Nonnull stop) {
+                    if (handler) handler.event(obj,nil, self.emptyDone);
+                }];
+                [self.connections removeAllObjects];
             }
         }
         return;
@@ -258,7 +256,7 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
             handler=self.handlers[type];
         }
         if (handler) {
-            handler.event(connection, nil,self.emptyDone);
+            handler.event(connection, parameter,self.emptyDone);
         }
         return;
     }

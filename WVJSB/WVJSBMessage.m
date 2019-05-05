@@ -39,8 +39,8 @@
         NSInteger code=[error[@"code"] integerValue];
         NSString *domain=error[@"domain"];
         NSString *description=error[@"description"];
-        if (description) self.error=[NSError errorWithDomain:domain code:code userInfo:@{NSLocalizedDescriptionKey:description}];
-        else self.error=[NSError errorWithDomain:domain code:code userInfo:nil];
+        if (description) self.error=[NSError errorWithDomain:domain?domain:NSURLErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey:description}];
+        else self.error=[NSError errorWithDomain:domain?domain:NSURLErrorDomain code:code userInfo:nil];
     }
     return self;
 }
