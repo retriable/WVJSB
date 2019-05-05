@@ -21,6 +21,26 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         super.viewDidLoad()
         webView.delegate=self
         let server=WVJSBServer(webView: webView!, ns: nil)
+        server.on("connect").onEvent { (connection, parameter, done) -> Any? in
+            objc_sync_enter(self.connections)
+            self.connections.append(connection)
+            objc_sync_exit(self.connections)
+            NSLog("app: \(parameter.debugDescription) did connect")
+            let _ = done()
+            return nil
+        }
+        server.on("disconnect").onEvent { (connection, parameter, done) -> Any? in
+            objc_sync_enter(self.connections)
+            if let idx = self.connections.firstIndex(where: { (c) -> Bool in
+                return c.isEqual(connection)
+            }) {
+                self.connections.remove(at: idx)
+            }
+            objc_sync_exit(self.connections)
+            NSLog("app: \(connection.info.debugDescription) did disconnect")
+            let _ = done()
+            return nil
+        }
         server.on("immediate").onEvent { (connection, parameter, done) -> Any? in
             done()("immediate ack",nil)
             return nil
@@ -56,9 +76,9 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         for (connection) in connections{
             let operation = connection.event(type:"immediate", parameter: nil).onAck {[weak self] operation ,parameter, error in
                 if  error != nil {
-                    NSLog("did receive immediate error: \(error!)")
+                    NSLog("app: did receive immediate error: \(error!)")
                 }else{
-                    NSLog("did receive immediate ack: \(parameter! as AnyObject)")
+                    NSLog("app: did receive immediate ack: \(parameter! as AnyObject)")
                 }
                 if var opts = self?.operations{
                     objc_sync_enter(opts)
@@ -81,9 +101,9 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         for (connection) in connections{
             let operation = connection.event(type:"delayed", parameter: nil).onAck {[weak self] operation, parameter, error in
                 if  error != nil {
-                    NSLog("did receive delayed error: \(error!)")
+                    NSLog("app: did receive delayed error: \(error!)")
                 }else{
-                    NSLog("did receive delayed ack: \(parameter! as AnyObject)")
+                    NSLog("app: did receive delayed ack: \(parameter! as AnyObject)")
                 }
                 if var opts = self?.operations{
                     objc_sync_enter(opts)
