@@ -18,16 +18,28 @@ NSString * const WVJSBQueryFormat=@";(function(){try{return window['%@_wvjsb_pro
 
 NSString * const WVJSBSendFormat=@";(function(){try{return window['%@_wvjsb_proxy'].send('%@');}catch(e){return ''};})();";
 
-static inline NSString *WVJSBCorrectedJSString(NSString *v){
-    v = [v stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
-    v = [v stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    v = [v stringByReplacingOccurrencesOfString:@"\'" withString:@"\\\'"];
-    v = [v stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
-    v = [v stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
-    v = [v stringByReplacingOccurrencesOfString:@"\f" withString:@"\\f"];
-    v = [v stringByReplacingOccurrencesOfString:@"\u2028" withString:@"\\u2028"];
-    v = [v stringByReplacingOccurrencesOfString:@"\u2029" withString:@"\\u2029"];
-    return v;
+static inline NSString *WVJSBEscapedJSString(NSString *v){
+    NSMutableString *s=[NSMutableString stringWithCapacity:v.length];
+    for (NSUInteger i=0,len=v.length;i<len;i++){
+        unichar c = [v characterAtIndex:i];
+        switch (c) {
+            case '\\':
+                [s appendString:@"\\\\"];
+                break;
+            case '\'':
+                [s appendString:@"\\'"];
+                break;
+            case '"':
+                [s appendString:@"\\\""];
+                break;
+            default:
+                [s appendString:[NSString stringWithCharacters:&c length:1]];
+                break;
+        }
+    }
+    [s replaceOccurrencesOfString:@"\u2028" withString:@"\\u2028" options:0  range:NSMakeRange(0, s.length)];
+    [s replaceOccurrencesOfString:@"\u2029" withString:@"\\u2029" options:0  range:NSMakeRange(0, s.length)];
+    return s;
 }
 
 @interface WVJSBServer ()
@@ -162,7 +174,7 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
         if(completion) completion(NO);
         return;
     }
-    self.evaluate([NSString stringWithFormat:WVJSBSendFormat,self.ns,WVJSBCorrectedJSString(string)],^(id result){
+    self.evaluate([NSString stringWithFormat:WVJSBSendFormat,self.ns,WVJSBEscapedJSString(string)],^(id result){
         if(completion) completion([result length]>0);
     });
 }
