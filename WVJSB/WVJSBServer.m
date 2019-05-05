@@ -196,9 +196,11 @@ static inline NSString *WVJSBCorrectedJSString(NSString *v){
                 handler=self.handlers[@"disconnect"];
             }
             @synchronized (self.connections) {
-                [self.connections enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, WVJSBConnectionImpl * _Nonnull obj, BOOL * _Nonnull stop) {
-                    if (handler) handler.event(obj,nil, self.emptyDone);
-                }];
+                if (handler) {
+                    [self.connections enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, WVJSBConnectionImpl * _Nonnull obj, BOOL * _Nonnull stop) {
+                        handler.event(obj,nil, self.emptyDone);
+                    }];
+                }
                 [self.connections removeAllObjects];
             }
         }
