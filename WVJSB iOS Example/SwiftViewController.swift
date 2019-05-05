@@ -25,7 +25,7 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
             objc_sync_enter(self.connections)
             self.connections.append(connection)
             objc_sync_exit(self.connections)
-            NSLog("app: \(parameter.debugDescription) did connect")
+            NSLog("\(parameter as AnyObject?) did connect")
             let _ = done()
             return nil
         }
@@ -37,12 +37,12 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
                 self.connections.remove(at: idx)
             }
             objc_sync_exit(self.connections)
-            NSLog("app: \(connection.info.debugDescription) did disconnect")
+            NSLog("\(connection.info as AnyObject?) did disconnect")
             let _ = done()
             return nil
         }
         server.on("immediate").onEvent { (connection, parameter, done) -> Any? in
-            done()("immediate ack",nil)
+            done()("[\\] ['] [\"] [\u{8}] [\u{000C}] [\n] [\r] [\t] [\u{2028}] [\u{2029}]",nil)
             return nil
         }
         server.on("delayed").onEvent { (connection, parameter, done) -> Any? in
@@ -52,7 +52,7 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
                 if (arc4random()%2==0){
                     done()(nil,NSError(domain: NSURLErrorDomain, code: NSURLErrorCannotFindHost, userInfo: [NSLocalizedDescriptionKey:"can not find host"]))
                 }else{
-                    done()("delayed ack",nil)
+                    done()("[\\] ['] [\"] [\u{8}] [\u{000C}] [\n] [\r] [\t] [\u{2028}] [\u{2029}]",nil)
                 }
             })
             timer.resume()
@@ -76,9 +76,9 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         for (connection) in connections{
             let operation = connection.event(type:"immediate", parameter: nil).onAck {[weak self] operation ,parameter, error in
                 if  error != nil {
-                    NSLog("app: did receive immediate error: \(error!)")
+                    NSLog("did receive immediate error: \(error!)")
                 }else{
-                    NSLog("app: did receive immediate ack: \(parameter! as AnyObject)")
+                    NSLog("did receive immediate ack: \(parameter! as AnyObject)")
                 }
                 if var opts = self?.operations{
                     objc_sync_enter(opts)
@@ -101,9 +101,9 @@ class SwiftViewController: UIViewController,UIWebViewDelegate {
         for (connection) in connections{
             let operation = connection.event(type:"delayed", parameter: nil).onAck {[weak self] operation, parameter, error in
                 if  error != nil {
-                    NSLog("app: did receive delayed error: \(error!)")
+                    NSLog("did receive delayed error: \(error!)")
                 }else{
-                    NSLog("app: did receive delayed ack: \(parameter! as AnyObject)")
+                    NSLog("did receive delayed ack: \(parameter! as AnyObject)")
                 }
                 if var opts = self?.operations{
                     objc_sync_enter(opts)

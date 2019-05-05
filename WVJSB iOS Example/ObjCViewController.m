@@ -49,7 +49,7 @@
         return nil;
     }];
     [[server on:@"immediate"] onEvent:^id (id<WVJSBConnection> connection, id parameter, WVJSBAckBlock (^ done)(void)) {
-        done()(@"immediate ack",nil);
+        done()(@"[\\] ['] [\"] [\b] [\f] [\n] [\r] [\t] [\u2028] [\u2029]",nil);
         return nil;
     }];
     [[[server on:@"delayed"] onEvent:^id (id<WVJSBConnection> connection, id parameter, WVJSBAckBlock (^ done)(void)) {
@@ -57,7 +57,7 @@
         dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*2), DBL_MAX, 0 * NSEC_PER_SEC);
         dispatch_source_set_event_handler(timer, ^{
             if (arc4random()%2){
-                done()(@"delayed ack",nil);
+                done()(@"[\\] ['] [\"] [\b] [\f] [\n] [\r] [\t] [\u2028] [\u2029]",nil);
             }else{
                 done()(nil,[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotFindHost userInfo:@{NSLocalizedDescriptionKey:@"can not find host"}]);
             }

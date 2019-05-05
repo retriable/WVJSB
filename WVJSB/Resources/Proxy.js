@@ -49,7 +49,7 @@
 				document.documentElement.appendChild(iframe);
 				setTimeout(function() {
 					document.documentElement.removeChild(iframe);
-				}, 0);
+				}, 1);
 			} catch (e) {}
 		};
 		return v;

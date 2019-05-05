@@ -264,7 +264,7 @@ const WVJSBClient = function(namespace = 'wvjsb_namespace', info = {}) {
 		document.documentElement.appendChild(iframe);
 		window.setTimeout(function() {
 			document.documentElement.removeChild(iframe);
-		}, 0);
+		}, 1);
 	}
 	tellServerToInstall();
 	connect();
